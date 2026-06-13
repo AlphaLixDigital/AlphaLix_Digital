@@ -35,8 +35,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(237,234,228,
 .nav-toggle span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
 
 /* ── HERO ── */
-#hero{padding:136px 24px 80px;max-width:1200px;margin:0 auto}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+#hero{padding:136px 24px 80px;max-width:1200px;margin:0 auto;overflow:visible}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;overflow:visible}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:50px;padding:7px 16px;font-size:13px;font-weight:600;color:#15803d;margin-bottom:24px}
 .hero-badge-dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.3)}}
@@ -56,7 +56,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(237,234,228,
 .metric-label{font-size:13px;color:var(--muted);margin-top:4px}
 
 /* Hero Visual */
-.hero-visual{position:relative}
+.hero-visual{position:relative;overflow:visible}
 .hero-visual-card{background:linear-gradient(145deg,rgba(255,255,255,0.75),rgba(255,255,255,0.4));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.55);border-radius:20px;padding:28px;box-shadow:var(--shadow-md),inset 0 1px 0 rgba(255,255,255,.9)}
 .hvc-title{font-size:15px;font-weight:700;margin-bottom:18px;color:var(--text)}
 .hvc-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -73,7 +73,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(237,234,228,
 .float-chip-icon svg{width:16px;height:16px;stroke:var(--green-mid);fill:none;stroke-width:2}
 .fc-val{font-weight:800;font-size:14px}
 .fc-lbl{font-size:11px;color:var(--muted)}
-.float-1{top:-18px;right:-16px;animation:float1 4s ease-in-out infinite}
+.float-1{top:-45px;right:-10px;animation:float1 4s ease-in-out infinite}
 .float-2{bottom:-16px;left:-16px;animation:float2 5s ease-in-out infinite}
 @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
@@ -669,7 +669,7 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
 <section id="hero">
   <div class="hero-grid">
     <div>
-      <div class="hero-badge"><span class="hero-badge-dot"></span> Trusted by 50+ clients worldwide</div>
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Trusted by 5+ clients worldwide</div>
       <h1 class="hero-title">We Build Digital<br><span class="accent">Experiences That</span><br>Drive Growth.</h1>
       <p class="hero-sub">From full-stack development to AI automation, we craft premium software solutions for startups, businesses, and students.</p>
       <div class="hero-btns">
@@ -681,7 +681,7 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         </a>
       </div>
       <div class="hero-metrics">
-        <div class="metric fade-in"><div class="metric-num">50<span>+</span></div><div class="metric-label">Projects Delivered</div></div>
+        <div class="metric fade-in"><div class="metric-num">5<span>+</span></div><div class="metric-label">Projects Delivered</div></div>
         <div class="metric fade-in fade-in-delay-1"><div class="metric-num">98<span>%</span></div><div class="metric-label">Client Satisfaction</div></div>
         <div class="metric fade-in fade-in-delay-2"><div class="metric-num">1<span>yr</span></div><div class="metric-label">Of Excellence</div></div>
       </div>
@@ -691,7 +691,7 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         <div class="float-chip-icon">
           <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
-        <div><div class="fc-val">143%</div><div class="fc-lbl">Avg. Client Growth</div></div>
+        <div><div class="fc-val">123%</div><div class="fc-lbl">Avg. Client Growth</div></div>
       </div>
       <div class="hero-visual-card">
         <div class="hvc-title">AlphaLix — Delivery Metrics</div>
@@ -708,7 +708,7 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         <div class="hvc-row">
           <span class="hvc-label">Satisfaction Score</span>
           <div class="hvc-bar-wrap"><div class="hvc-bar-fill" style="width:98%"></div></div>
-          <span class="hvc-val">4.9/5</span>
+          <span class="hvc-val">4.7/5</span>
         </div>
         <div class="hvc-row">
           <span class="hvc-label">Repeat Projects</span>
@@ -716,9 +716,9 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
           <span class="hvc-val">74%</span>
         </div>
         <div class="hvc-stat-row">
-          <div class="hvc-stat"><div class="hvc-stat-num">50+</div><div class="hvc-stat-lbl">Projects</div></div>
-          <div class="hvc-stat"><div class="hvc-stat-num">30+</div><div class="hvc-stat-lbl">Clients</div></div>
-          <div class="hvc-stat"><div class="hvc-stat-num">4.9</div><div class="hvc-stat-lbl">Rating</div></div>
+          <div class="hvc-stat"><div class="hvc-stat-num">5+</div><div class="hvc-stat-lbl">Projects</div></div>
+          <div class="hvc-stat"><div class="hvc-stat-num">5+</div><div class="hvc-stat-lbl">Clients</div></div>
+          <div class="hvc-stat"><div class="hvc-stat-num">4.7</div><div class="hvc-stat-lbl">Rating</div></div>
         </div>
       </div>
       <div class="float-chip float-2">
@@ -923,9 +923,9 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
           <div class="proj-desc">A fully-featured e-commerce platform for fashion retail — product catalogue, cart system, order management, and a clean modern storefront. Delivered and live.</div>
           <div class="proj-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">Stripe</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Tailwind</span></div>
           <div class="proj-links">
-            <a href="#" class="proj-link" target="_blank">
+            <a href="https://alphalix-digital.netlify.app/" class="proj-link" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub
+              Under Working
             </a>
 
           </div>
@@ -942,9 +942,9 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
           <div class="proj-desc">A bridge management and structural analysis platform connecting engineers and project stakeholders. Features data visualization and real-time collaboration tools.</div>
           <div class="proj-tech"><span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Charts.js</span></div>
           <div class="proj-links">
-            <a href="#" class="proj-link" target="_blank">
+            <a href="https://github.com/HassanNawaz14/CADS-Bridge" class="proj-link" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub
+              See The Code
             </a>
           </div>
         </div>
@@ -960,9 +960,9 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
           <div class="proj-desc">An AI-powered travel planning companion that generates personalised itineraries, recommends local experiences, and helps users discover destinations intelligently.</div>
           <div class="proj-tech"><span class="tech-tag">React</span><span class="tech-tag">OpenAI</span><span class="tech-tag">Firebase</span><span class="tech-tag">Maps API</span></div>
           <div class="proj-links">
-            <a href="#" class="proj-link" target="_blank">
+            <a href="https://github.com/HassanNawaz14/Travel-Buddy-" class="proj-link" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub
+              See the Code
             </a>
           </div>
         </div>
@@ -978,9 +978,9 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
           <div class="proj-desc">A niche e-commerce store specialised in Rubik's Cubes and puzzle products — featuring product variants, speed-solving guides, and a streamlined checkout experience.</div>
           <div class="proj-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">Stripe</span><span class="tech-tag">Sanity CMS</span><span class="tech-tag">Vercel</span></div>
           <div class="proj-links">
-            <a href="#" class="proj-link" target="_blank">
+            <a href="https://alphalix-digital.netlify.app/" class="proj-link" target="_blank">
               <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub
+              Under Working
             </a>
 
           </div>
@@ -1099,10 +1099,10 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         <div class="member-role">Founder & Lead Developer</div>
         <div class="member-bio">Full-stack engineer with deep expertise in React, Node.js, and AI integration. Passionate about building scalable products that solve real problems. Committed to clean code, thoughtful architecture, and delivering exceptional client experiences.</div>
         <div class="social-row">
-          <a href="#" class="social-btn" title="LinkedIn" target="_blank">
+          <a href="https://www.linkedin.com/in/zohaib-mzg/" class="social-btn" title="LinkedIn" target="_blank">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a href="#" class="social-btn" title="GitHub" target="_blank">
+          <a href="https://github.com/zohaib-mzg" class="social-btn" title="GitHub" target="_blank">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           </a>
           <a href="https://muhammad-zohaib-158.vercel.app/" class="social-btn" title="Portfolio" target="_blank">
@@ -1118,13 +1118,13 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         <div class="member-role">Co-Founder & Product Strategist</div>
         <div class="member-bio">Combines sharp technical skill with product thinking. Specialises in AI automation, UX design, and turning complex requirements into elegant, user-friendly solutions. Focused on delivering tangible business value with every project.</div>
         <div class="social-row">
-          <a href="#" class="social-btn" title="LinkedIn" target="_blank">
+          <a href="https://www.linkedin.com/in/anas-bilal-716bba373/" class="social-btn" title="LinkedIn" target="_blank">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a href="#" class="social-btn" title="GitHub" target="_blank">
+          <a href="https://github.com/10anasbilal" class="social-btn" title="GitHub" target="_blank">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           </a>
-          <a href="#" class="social-btn" title="Portfolio" target="_blank">
+          <a href="https://anasbilal-portfolio.netlify.app/" class="social-btn" title="Portfolio" target="_blank">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </a>
         </div>
@@ -1172,11 +1172,11 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         <div class="contact-info-list">
           <div class="info-item">
             <div class="info-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="info-label">Email</div><div class="info-val">alphalixdigital@gmail.com</div></div>
+            <div><div class="info-label">Email</div><div class="info-val">mailto:alphalixdigital@gmail.com</div></div>
           </div>
           <div class="info-item">
             <div class="info-icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.27 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9A16 16 0 0 0 15 15.91l.82-.82a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-            <div><div class="info-label">WhatsApp</div><div class="info-val">+92 345 7627926</div></div>
+            <div><div class="info-label">WhatsApp</div><div class="info-val">+92 327 0734564</div></div>
           </div>
           <div class="info-item">
             <div class="info-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
@@ -1191,27 +1191,27 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         <div class="social-links-section">
           <div class="social-links-title">Connect with us</div>
           <div class="social-links-row">
-            <a href="#" class="soc-link" target="_blank" title="LinkedIn">
+            <a href="https://www.linkedin.com/company/alphalix-digital" class="soc-link" target="_blank" title="LinkedIn">
               <svg viewBox="0 0 24 24" fill="#0077b5" width="16" height="16"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               LinkedIn
             </a>
-            <a href="#" class="soc-link" target="_blank" title="GitHub">
+            <a href="https://github.com/AlphaLixDigital" class="soc-link" target="_blank" title="GitHub">
               <svg viewBox="0 0 24 24" fill="#1F2937" width="16" height="16"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               GitHub
             </a>
-            <a href="#" class="soc-link" target="_blank" title="Instagram">
+            <a href="https://www.instagram.com/alphalixdigital/" class="soc-link" target="_blank" title="Instagram">
               <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#e1306c" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               Instagram
             </a>
-            <a href="#" class="soc-link" target="_blank" title="Twitter/X">
+            <a href="https://alphalix-digital.netlify.app/" class="soc-link" target="_blank" title="Twitter/X">
               <svg viewBox="0 0 24 24" fill="#1F2937" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               Twitter/X
             </a>
-            <a href="#" class="soc-link" target="_blank" title="Facebook">
+            <a href="https://www.facebook.com/AlphaLixDigital" class="soc-link" target="_blank" title="Facebook">
               <svg viewBox="0 0 24 24" fill="#1877f2" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               Facebook
             </a>
-            <a href="mailto:hello@alphaliixdigital.com" class="soc-link" title="Gmail">
+            <a href="mailto:alphalixdigital@gmail.com" class="soc-link" title="Gmail">
               <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#ea4335" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               Gmail
             </a>
@@ -1281,11 +1281,11 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
         <p class="footer-tagline">We build premium digital experiences — from full-stack applications to AI automation. Your success is our product.</p>
         <div class="footer-social">
           <a href="#" class="footer-soc" title="LinkedIn" target="_blank"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#" class="footer-soc" title="GitHub" target="_blank"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-          <a href="#" class="footer-soc" title="Instagram" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="#" class="footer-soc" title="Twitter/X" target="_blank"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          <a href="#" class="footer-soc" title="Facebook" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="mailto:hello@alphaliixdigital.com" class="footer-soc" title="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+          <a href="https://github.com/AlphaLixDigital" class="footer-soc" title="GitHub" target="_blank"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="https://www.instagram.com/alphalixdigital/" class="footer-soc" title="Instagram" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://alphalix-digital.netlify.app/" class="footer-soc" title="Twitter/X" target="_blank"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.facebook.com/AlphaLixDigital" class="footer-soc" title="Facebook" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="mailto:alphalixdigital@gmail.com" class="footer-soc" title="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
         </div>
       </div>
       <div>
@@ -1315,7 +1315,7 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
           <li><a href="#pricing">View Pricing</a></li>
           <li><a href="#process">Our Process</a></li>
           <li><a href="#testimonials">Client Reviews</a></li>
-          <li><a href="https://wa.me/923457627926" target="_blank">WhatsApp Us</a></li>
+          <li><a href="https://wa.me/923270724564" target="_blank">WhatsApp Us</a></li>
         </ul>
       </div>
     </div>
@@ -1327,7 +1327,7 @@ footer h5{font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-s
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/923457627926" class="wa-float" target="_blank" title="Chat on WhatsApp">
+<a href="https://wa.me/923270734564" class="wa-float" target="_blank" title="Chat on WhatsApp">
   <span class="wa-tooltip">Chat on WhatsApp</span>
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
 </a>
