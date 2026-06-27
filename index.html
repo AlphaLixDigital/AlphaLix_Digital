@@ -622,6 +622,10 @@ input,textarea,select{padding:12px 14px;border:1.5px solid var(--border);border-
 input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.08)}
 textarea{resize:vertical;min-height:120px}
 .field-err{font-size:11px;color:#ef4444;margin-top:-8px;display:none}
+.pro-field-err{font-size:11px;color:#ef4444;margin-top:4px;display:none}
+.pro-field-err.show{display:block}
+input.input-error,textarea.input-error,select.input-error{border-color:#ef4444!important;box-shadow:0 0 0 3px rgba(239,68,68,.1)!important}
+input.input-ok,textarea.input-ok,select.input-ok{border-color:var(--green)!important}
 .contact-info-list{display:flex;flex-direction:column;gap:20px;margin-bottom:36px}
 .info-item{display:flex;gap:14px;align-items:flex-start}
 .info-icon-wrap{width:44px;height:44px;border-radius:12px;background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -976,24 +980,29 @@ select.af-input{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg x
         <div class="pro-input-group">
           <input type="text" id="pf-name" name="name" required placeholder=" ">
           <label for="pf-name">Full Name</label>
+          <div class="pro-field-err" id="pf-err-name">Full name is required (letters only)</div>
         </div>
         <div class="pro-input-group">
           <input type="tel" id="pf-phone" name="phone" required placeholder=" ">
           <label for="pf-phone">Mobile Number</label>
+          <div class="pro-field-err" id="pf-err-phone">Enter a valid phone number (digits only)</div>
         </div>
       </div>
       <div class="pro-input-group">
         <input type="email" id="pf-email" name="email" required placeholder=" ">
         <label for="pf-email">Email Address</label>
+        <div class="pro-field-err" id="pf-err-email">Enter a valid email address</div>
       </div>
       <div class="pro-input-group">
         <select id="pf-type" name="project_type" required>
           <option value="" disabled selected>Select Project Type</option>
         </select>
+        <div class="pro-field-err" id="pf-err-type">Please select a project type</div>
       </div>
       <div class="pro-input-group">
         <textarea id="pf-details" name="details" required placeholder=" " rows="4"></textarea>
         <label for="pf-details">Project Description</label>
+        <div class="pro-field-err" id="pf-err-details">Please describe your project (min. 20 characters)</div>
       </div>
       <div class="pro-plan-selector">
         <div class="pro-plan-label">Choose Plan</div>
@@ -1419,6 +1428,7 @@ select.af-input{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg x
           <div class="af-group">
             <label class="af-label">LinkedIn Profile </label>
             <input class="af-input" type="url" id="af-linkedin" placeholder="linkedin.com/in/yourname" />
+            <div class="af-err" id="af-err-linkedin">Enter a valid LinkedIn URL</div>
           </div>
         </div>
       </div>
@@ -1519,6 +1529,7 @@ select.af-input{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg x
         <div class="af-group">
           <label class="af-label">Portfolio / Work Samples <span style="font-size:12px;color:var(--muted);font-weight:400">(optional)</span></label>
           <input class="af-input" type="url" id="af-portfolio" placeholder="Website, Notion doc, Behance, LinkedIn posts…" />
+          <div class="af-err" id="af-err-portfolio">Enter a valid URL (must start with http:// or https://)</div>
         </div>
         <div class="af-group">
           <label class="af-label">Anything else you want to tell us?</label>
@@ -1650,13 +1661,13 @@ select.af-input{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg x
           <div class="form-row">
             <div class="form-group">
               <label for="cf-fname">First Name</label>
-              <input type="text" id="cf-fname" name="firstName" placeholder="MUHAMMAD">
-              <div class="field-err" id="err-fname">First name is required</div>
+              <input type="text" id="cf-fname" name="firstName" placeholder="MUHAMMAD" autocomplete="given-name">
+              <div class="field-err" id="err-fname">First name is required (letters only)</div>
             </div>
             <div class="form-group">
               <label for="cf-lname">Last Name</label>
-              <input type="text" id="cf-lname" name="lastName" placeholder="ZOHAIB">
-              <div class="field-err" id="err-lname">Last name is required</div>
+              <input type="text" id="cf-lname" name="lastName" placeholder="ZOHAIB" autocomplete="family-name">
+              <div class="field-err" id="err-lname">Last name is required (letters only)</div>
             </div>
           </div>
           <div class="form-group">
@@ -1678,6 +1689,7 @@ select.af-input{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg x
               <option>Content Writing</option>
               <option>Other</option>
             </select>
+            <div class="field-err" id="err-service">Please select a service</div>
           </div>
           <div class="form-group">
             <label for="cf-msg">Tell us about your project</label>
@@ -1804,7 +1816,7 @@ function renderApplyStep() {
   const pct = (applyCurrentStep / applyTotalSteps) * 100;
   document.getElementById('applyProgress').style.width = pct + '%';
   const labels = ['Personal Information','Skills & Background','Your Motivation','CV & Documents','AlphaLix Digital'];
-  document.getElementById('applyStepLabel').textContent = labels[applyCurrentStep - 1];
+  document.getElementById('applyStepLabel').textContent = labels[applyCurrentStep];
   document.getElementById('applyBackBtn').style.display = applyCurrentStep > 1 ? 'flex' : 'none';
   const isLast = applyCurrentStep === applyTotalSteps;
   document.getElementById('applyNextBtn').style.display = isLast ? 'none' : 'flex';
@@ -1814,41 +1826,146 @@ function renderApplyStep() {
   document.getElementById('applyModalBox').scrollTop = 0;
 }
 
+function showFieldErr(errId, msg) {
+  const el = document.getElementById(errId);
+  if (!el) return;
+  if (msg) el.textContent = msg;
+  el.classList.add('show');
+}
+function clearFieldErr(errId) {
+  const el = document.getElementById(errId);
+  if (el) el.classList.remove('show');
+}
+function markField(id, ok) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('input-error', !ok);
+  el.classList.toggle('input-ok', ok);
+}
+
 function validateStep(step) {
   let ok = true;
-  const req = id => {
+
+  // Helper: require non-empty
+  const req = (id, errMsg) => {
     const el = document.getElementById(id);
-    const err = document.getElementById('af-err-' + id.replace('af-',''));
-    if (!el || !el.value.trim()) { if(err) err.classList.add('show'); ok = false; }
-    else { if(err) err.classList.remove('show'); }
+    if (!el || !el.value.trim()) {
+      showFieldErr('af-err-' + id.replace('af-',''), errMsg || 'Required');
+      markField(id, false); ok = false;
+    } else { clearFieldErr('af-err-' + id.replace('af-','')); markField(id, true); }
   };
+
   if (step === 1) {
-    req('af-fname'); req('af-lname'); req('af-phone'); req('af-location');
-    // email
+    // First name: letters only
+    const fn = document.getElementById('af-fname');
+    if (!fn.value.trim()) {
+      showFieldErr('af-err-fname','First name is required'); markField('af-fname',false); ok=false;
+    } else if (!/^[A-Za-z\s\-']{2,}$/.test(fn.value.trim())) {
+      showFieldErr('af-err-fname','Letters only (no numbers or symbols)'); markField('af-fname',false); ok=false;
+    } else { clearFieldErr('af-err-fname'); markField('af-fname',true); }
+
+    // Last name: letters only
+    const ln = document.getElementById('af-lname');
+    if (!ln.value.trim()) {
+      showFieldErr('af-err-lname','Last name is required'); markField('af-lname',false); ok=false;
+    } else if (!/^[A-Za-z\s\-']{2,}$/.test(ln.value.trim())) {
+      showFieldErr('af-err-lname','Letters only (no numbers or symbols)'); markField('af-lname',false); ok=false;
+    } else { clearFieldErr('af-err-lname'); markField('af-lname',true); }
+
+    // Email
     const em = document.getElementById('af-email');
-    const emErr = document.getElementById('af-err-email');
-    if (!em.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { emErr.classList.add('show'); ok = false; }
-    else emErr.classList.remove('show');
+    if (!em.value.trim()) {
+      showFieldErr('af-err-email','Email is required'); markField('af-email',false); ok=false;
+    } else if (!em.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      showFieldErr('af-err-email','Enter a valid email address'); markField('af-email',false); ok=false;
+    } else { clearFieldErr('af-err-email'); markField('af-email',true); }
+
+    // Phone: digits, +, dashes, spaces, parens; min 7 digits
+    const ph = document.getElementById('af-phone');
+    const phDigits = ph.value.replace(/\D/g,'');
+    if (!ph.value.trim()) {
+      showFieldErr('af-err-phone','Phone number is required'); markField('af-phone',false); ok=false;
+    } else if (!/^[\d\s\+\-\(\)]{7,20}$/.test(ph.value.trim()) || phDigits.length < 7) {
+      showFieldErr('af-err-phone','Enter a valid number (7–15 digits, e.g. +92 300 0000000)'); markField('af-phone',false); ok=false;
+    } else { clearFieldErr('af-err-phone'); markField('af-phone',true); }
+
+    // Location: text, must have at least 2 chars
+    const loc = document.getElementById('af-location');
+    if (!loc.value.trim() || loc.value.trim().length < 2) {
+      showFieldErr('af-err-location','City / Country is required'); markField('af-location',false); ok=false;
+    } else { clearFieldErr('af-err-location'); markField('af-location',true); }
+
+    // LinkedIn (optional) - if filled, must look like a URL
+    const li = document.getElementById('af-linkedin');
+    if (li && li.value.trim()) {
+      if (!/^(https?:\/\/)?(www\.)?linkedin\.com\/.+/.test(li.value.trim())) {
+        showFieldErr('af-err-linkedin','Enter a valid LinkedIn URL (e.g. linkedin.com/in/yourname)');
+        markField('af-linkedin',false); ok=false;
+      } else { clearFieldErr('af-err-linkedin'); markField('af-linkedin',true); }
+    }
   }
+
   if (step === 2) {
     const checked = document.querySelectorAll('#af-skills-chips input:checked');
-    const skillsErr = document.getElementById('af-err-skills');
-    if (!checked.length) { skillsErr.classList.add('show'); ok = false; } else skillsErr.classList.remove('show');
-    req('af-exp'); req('af-source');
+    if (!checked.length) { showFieldErr('af-err-skills','Please select at least one skill'); ok=false; }
+    else clearFieldErr('af-err-skills');
+
+    // Experience level (select)
+    const exp = document.getElementById('af-exp');
+    if (!exp || !exp.value) { showFieldErr('af-err-exp','Please select your experience level'); markField('af-exp',false); ok=false; }
+    else { clearFieldErr('af-err-exp'); markField('af-exp',true); }
+
+    // Source (select)
+    const src = document.getElementById('af-source');
+    if (!src || !src.value) { showFieldErr('af-err-source','Please select an option'); markField('af-source',false); ok=false; }
+    else { clearFieldErr('af-err-source'); markField('af-source',true); }
   }
+
   if (step === 3) {
-    req('af-expect'); req('af-hours');
     const fit = document.getElementById('af-fit');
-    const fitErr = document.getElementById('af-err-fit');
-    if (!fit.value.trim() || fit.value.trim().length < 50) { fitErr.classList.add('show'); ok = false; } else fitErr.classList.remove('show');
+    if (!fit.value.trim()) {
+      showFieldErr('af-err-fit','This field is required'); markField('af-fit',false); ok=false;
+    } else if (fit.value.trim().length < 50) {
+      showFieldErr('af-err-fit','Please write at least 50 characters'); markField('af-fit',false); ok=false;
+    } else { clearFieldErr('af-err-fit'); markField('af-fit',true); }
+
+    const exp = document.getElementById('af-expect');
+    if (!exp.value.trim()) {
+      showFieldErr('af-err-expect','This field is required'); markField('af-expect',false); ok=false;
+    } else { clearFieldErr('af-err-expect'); markField('af-expect',true); }
+
+    const hrs = document.getElementById('af-hours');
+    if (!hrs.value) { showFieldErr('af-err-hours','Please select your availability'); markField('af-hours',false); ok=false; }
+    else { clearFieldErr('af-err-hours'); markField('af-hours',true); }
   }
+
   if (step === 4) {
     const cvInput = document.getElementById('af-cv');
-    const cvErr = document.getElementById('af-err-cv');
-    if (!cvInput.files || !cvInput.files.length) { cvErr.classList.add('show'); ok = false; } else cvErr.classList.remove('show');
+    if (!cvInput.files || !cvInput.files.length) {
+      showFieldErr('af-err-cv','Please upload your CV'); markField('af-cv',false); ok=false;
+    } else {
+      const file = cvInput.files[0];
+      const allowedTypes = ['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (!allowedTypes.includes(file.type)) {
+        showFieldErr('af-err-cv','Only PDF or Word documents allowed'); markField('af-cv',false); ok=false;
+      } else if (file.size > maxSize) {
+        showFieldErr('af-err-cv','File size must be under 5MB'); markField('af-cv',false); ok=false;
+      } else { clearFieldErr('af-err-cv'); markField('af-cv',true); }
+    }
+
+    // Portfolio URL (optional)
+    const port = document.getElementById('af-portfolio');
+    if (port && port.value.trim()) {
+      if (!/^https?:\/\/.{4,}/.test(port.value.trim())) {
+        showFieldErr('af-err-portfolio','Enter a valid URL starting with http:// or https://');
+        markField('af-portfolio',false); ok=false;
+      } else { clearFieldErr('af-err-portfolio'); markField('af-portfolio',true); }
+    }
+
     const ack = document.getElementById('af-ack');
-    const ackErr = document.getElementById('af-err-ack');
-    if (!ack.checked) { ackErr.classList.add('show'); ok = false; } else ackErr.classList.remove('show');
+    if (!ack.checked) { showFieldErr('af-err-ack','You must acknowledge this to proceed'); ok=false; }
+    else clearFieldErr('af-err-ack');
   }
   return ok;
 }
@@ -1938,7 +2055,94 @@ async function submitApplication() {
   }
 }
 
+// ── REAL-TIME VALIDATION HELPERS ──
+function validateNameField(inputId, errId) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  el.addEventListener('input', () => {
+    const v = el.value.trim();
+    el.classList.remove('input-error','input-ok');
+    const errEl = document.getElementById(errId);
+    if (!v) { if(errEl){errEl.style.display='block';errEl.textContent='This field is required';} el.classList.add('input-error'); }
+    else if (!/^[A-Za-z\s\-']{2,}$/.test(v)) { if(errEl){errEl.style.display='block';errEl.textContent='Letters only (no numbers or symbols)';} el.classList.add('input-error'); }
+    else { if(errEl) errEl.style.display='none'; el.classList.add('input-ok'); }
+  });
+}
+function validateEmailField(inputId, errId) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  el.addEventListener('input', () => {
+    const v = el.value.trim();
+    el.classList.remove('input-error','input-ok');
+    const errEl = document.getElementById(errId);
+    if (!v) { if(errEl){errEl.style.display='block';errEl.textContent='Email is required';} el.classList.add('input-error'); }
+    else if (!v.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { if(errEl){errEl.style.display='block';errEl.textContent='Enter a valid email address';} el.classList.add('input-error'); }
+    else { if(errEl) errEl.style.display='none'; el.classList.add('input-ok'); }
+  });
+}
+function validatePhoneField(inputId, errId) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  // Block non-numeric chars except +, spaces, dashes, parens
+  el.addEventListener('keypress', (e) => {
+    if (!/[\d\s\+\-\(\)]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'Tab') e.preventDefault();
+  });
+  el.addEventListener('input', () => {
+    const v = el.value.trim();
+    const digits = v.replace(/\D/g,'');
+    el.classList.remove('input-error','input-ok');
+    const errEl = document.getElementById(errId);
+    if (!v) { if(errEl){errEl.style.display='block';errEl.textContent='Phone number is required';} el.classList.add('input-error'); }
+    else if (digits.length < 7 || digits.length > 15) { if(errEl){errEl.style.display='block';errEl.textContent='Must be 7–15 digits';} el.classList.add('input-error'); }
+    else { if(errEl) errEl.style.display='none'; el.classList.add('input-ok'); }
+  });
+}
+
+// Wire up Contact Form
+validateNameField('cf-fname','err-fname');
+validateNameField('cf-lname','err-lname');
+validateEmailField('cf-email','err-email');
+document.getElementById('cf-service') && document.getElementById('cf-service').addEventListener('change', () => {
+  const el = document.getElementById('cf-service');
+  const errEl = document.getElementById('err-service');
+  if (el.value) { el.classList.remove('input-error'); el.classList.add('input-ok'); if(errEl) errEl.style.display='none'; }
+  else { el.classList.add('input-error'); el.classList.remove('input-ok'); if(errEl) errEl.style.display='block'; }
+});
+document.getElementById('cf-msg') && document.getElementById('cf-msg').addEventListener('input', () => {
+  const el = document.getElementById('cf-msg');
+  const errEl = document.getElementById('err-msg');
+  if (!el.value.trim()) { el.classList.add('input-error'); el.classList.remove('input-ok'); if(errEl){errEl.style.display='block';errEl.textContent='Please describe your project';} }
+  else if (el.value.trim().length < 20) { el.classList.add('input-error'); el.classList.remove('input-ok'); if(errEl){errEl.style.display='block';errEl.textContent='Min. 20 characters';} }
+  else { el.classList.remove('input-error'); el.classList.add('input-ok'); if(errEl) errEl.style.display='none'; }
+});
+
+// Wire up Pro Modal Form
+validateNameField('pf-name','pf-err-name');
+validatePhoneField('pf-phone','pf-err-phone');
+validateEmailField('pf-email','pf-err-email');
+
+// Wire up Application Modal
+validateNameField('af-fname','af-err-fname');
+validateNameField('af-lname','af-err-lname');
+validateEmailField('af-email','af-err-email');
+validatePhoneField('af-phone','af-err-phone');
+
+// CV file size/type check on selection
+document.getElementById('af-cv') && document.getElementById('af-cv').addEventListener('change', () => {
+  const el = document.getElementById('af-cv');
+  const errEl = document.getElementById('af-err-cv');
+  if (!el.files.length) return;
+  const file = el.files[0];
+  const allowed = ['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+  if (!allowed.includes(file.type)) {
+    errEl.textContent='Only PDF or Word documents allowed'; errEl.classList.add('show'); el.classList.add('input-error'); el.value='';
+  } else if (file.size > 5*1024*1024) {
+    errEl.textContent='File too large — max 5MB'; errEl.classList.add('show'); el.classList.add('input-error'); el.value='';
+  } else { errEl.classList.remove('show'); el.classList.add('input-ok'); }
+});
+
 window.addEventListener('scroll', () => {
+
   document.getElementById('navbar').style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(0,0,0,.07)' : 'none';
 });
 
@@ -2002,6 +2206,66 @@ function selectModalPlan(el, plan) {
 async function submitProForm(e) {
   e.preventDefault();
   const form = e.target;
+
+  // Clear previous errors
+  ['pf-err-name','pf-err-phone','pf-err-email','pf-err-type','pf-err-details'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.classList.remove('show');
+  });
+  ['pf-name','pf-phone','pf-email','pf-type','pf-details'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.classList.remove('input-error','input-ok');
+  });
+
+  let valid = true;
+
+  // Full Name: letters, spaces, hyphens
+  const pfName = document.getElementById('pf-name');
+  if (!pfName.value.trim()) {
+    document.getElementById('pf-err-name').textContent='Full name is required';
+    document.getElementById('pf-err-name').classList.add('show'); pfName.classList.add('input-error'); valid=false;
+  } else if (!/^[A-Za-z\s\-']{2,}$/.test(pfName.value.trim())) {
+    document.getElementById('pf-err-name').textContent='Letters only (no numbers or symbols)';
+    document.getElementById('pf-err-name').classList.add('show'); pfName.classList.add('input-error'); valid=false;
+  } else { pfName.classList.add('input-ok'); }
+
+  // Phone: digits, +, spaces, dashes, parens; min 7 digits
+  const pfPhone = document.getElementById('pf-phone');
+  const phoneDigits = pfPhone.value.replace(/\D/g,'');
+  if (!pfPhone.value.trim()) {
+    document.getElementById('pf-err-phone').textContent='Phone number is required';
+    document.getElementById('pf-err-phone').classList.add('show'); pfPhone.classList.add('input-error'); valid=false;
+  } else if (!/^[\d\s\+\-\(\)]{7,20}$/.test(pfPhone.value.trim()) || phoneDigits.length < 7) {
+    document.getElementById('pf-err-phone').textContent='Enter a valid phone number (digits only, 7–15 digits)';
+    document.getElementById('pf-err-phone').classList.add('show'); pfPhone.classList.add('input-error'); valid=false;
+  } else { pfPhone.classList.add('input-ok'); }
+
+  // Email
+  const pfEmail = document.getElementById('pf-email');
+  if (!pfEmail.value.trim()) {
+    document.getElementById('pf-err-email').textContent='Email is required';
+    document.getElementById('pf-err-email').classList.add('show'); pfEmail.classList.add('input-error'); valid=false;
+  } else if (!pfEmail.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    document.getElementById('pf-err-email').textContent='Enter a valid email address';
+    document.getElementById('pf-err-email').classList.add('show'); pfEmail.classList.add('input-error'); valid=false;
+  } else { pfEmail.classList.add('input-ok'); }
+
+  // Project Type
+  const pfType = document.getElementById('pf-type');
+  if (!pfType.value) {
+    document.getElementById('pf-err-type').classList.add('show'); pfType.classList.add('input-error'); valid=false;
+  } else { pfType.classList.add('input-ok'); }
+
+  // Project Details
+  const pfDetails = document.getElementById('pf-details');
+  if (!pfDetails.value.trim()) {
+    document.getElementById('pf-err-details').textContent='Please describe your project';
+    document.getElementById('pf-err-details').classList.add('show'); pfDetails.classList.add('input-error'); valid=false;
+  } else if (pfDetails.value.trim().length < 20) {
+    document.getElementById('pf-err-details').textContent='Please provide more detail (min. 20 characters)';
+    document.getElementById('pf-err-details').classList.add('show'); pfDetails.classList.add('input-error'); valid=false;
+  } else { pfDetails.classList.add('input-ok'); }
+
+  if (!valid) return;
+
   const btn = document.getElementById('pf-submitBtn');
   const btnSpan = btn.querySelector('span');
   btnSpan.textContent = 'Sending...';
@@ -2012,6 +2276,9 @@ async function submitProForm(e) {
     if (res.ok) {
       document.getElementById('pf-msg').style.display = 'block';
       form.reset();
+      ['pf-name','pf-phone','pf-email','pf-type','pf-details'].forEach(id => {
+        const el = document.getElementById(id); if(el) el.classList.remove('input-ok');
+      });
       btnSpan.textContent = 'Submit Request';
       btn.disabled = false;
       btn.style.opacity = '1';
@@ -2037,15 +2304,58 @@ async function submitContact(e) {
   const fname = document.getElementById('cf-fname');
   const lname = document.getElementById('cf-lname');
   const email = document.getElementById('cf-email');
+  const service = document.getElementById('cf-service');
   const msg = document.getElementById('cf-msg');
   let valid = true;
 
-  ['err-fname','err-lname','err-email','err-msg'].forEach(id => document.getElementById(id).style.display='none');
+  ['err-fname','err-lname','err-email','err-service','err-msg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.display='none'; }
+  });
+  [fname, lname, email, service, msg].forEach(el => { if(el) { el.classList.remove('input-error','input-ok'); } });
 
-  if (!fname.value.trim()) { document.getElementById('err-fname').style.display='block'; valid=false; }
-  if (!lname.value.trim()) { document.getElementById('err-lname').style.display='block'; valid=false; }
-  if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { document.getElementById('err-email').style.display='block'; valid=false; }
-  if (!msg.value.trim()) { document.getElementById('err-msg').style.display='block'; valid=false; }
+  // First name: letters, spaces, hyphens only
+  if (!fname.value.trim()) {
+    document.getElementById('err-fname').textContent = 'First name is required';
+    document.getElementById('err-fname').style.display='block'; fname.classList.add('input-error'); valid=false;
+  } else if (!/^[A-Za-z\s\-']{2,}$/.test(fname.value.trim())) {
+    document.getElementById('err-fname').textContent = 'Letters only (no numbers or symbols)';
+    document.getElementById('err-fname').style.display='block'; fname.classList.add('input-error'); valid=false;
+  } else { fname.classList.add('input-ok'); }
+
+  // Last name: letters only
+  if (!lname.value.trim()) {
+    document.getElementById('err-lname').textContent = 'Last name is required';
+    document.getElementById('err-lname').style.display='block'; lname.classList.add('input-error'); valid=false;
+  } else if (!/^[A-Za-z\s\-']{2,}$/.test(lname.value.trim())) {
+    document.getElementById('err-lname').textContent = 'Letters only (no numbers or symbols)';
+    document.getElementById('err-lname').style.display='block'; lname.classList.add('input-error'); valid=false;
+  } else { lname.classList.add('input-ok'); }
+
+  // Email
+  if (!email.value.trim()) {
+    document.getElementById('err-email').textContent = 'Email address is required';
+    document.getElementById('err-email').style.display='block'; email.classList.add('input-error'); valid=false;
+  } else if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    document.getElementById('err-email').textContent = 'Enter a valid email (e.g. you@example.com)';
+    document.getElementById('err-email').style.display='block'; email.classList.add('input-error'); valid=false;
+  } else { email.classList.add('input-ok'); }
+
+  // Service
+  if (!service.value) {
+    const errEl = document.getElementById('err-service');
+    if (errEl) { errEl.style.display='block'; } service.classList.add('input-error'); valid=false;
+  } else { service.classList.add('input-ok'); }
+
+  // Message
+  if (!msg.value.trim()) {
+    document.getElementById('err-msg').textContent = 'Please describe your project';
+    document.getElementById('err-msg').style.display='block'; msg.classList.add('input-error'); valid=false;
+  } else if (msg.value.trim().length < 20) {
+    document.getElementById('err-msg').textContent = 'Please provide more detail (min. 20 characters)';
+    document.getElementById('err-msg').style.display='block'; msg.classList.add('input-error'); valid=false;
+  } else { msg.classList.add('input-ok'); }
+
   if (!valid) return;
 
   const btn = document.getElementById('contactSubmitBtn');
@@ -2061,6 +2371,7 @@ async function submitContact(e) {
     if (res.ok) {
       document.getElementById('contact-success').style.display = 'block';
       document.getElementById('contactForm').reset();
+      [fname, lname, email, service, msg].forEach(el => { if(el) el.classList.remove('input-ok'); });
       btn.style.display = 'none';
     } else {
       btn.textContent = 'Error — Please Try Again';
